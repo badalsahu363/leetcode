@@ -18,24 +18,23 @@ class Solution
             if (root == NULL) return ans;
             queue<TreeNode*> q;
             q.push(root);
-            int cnt = 0;
+            bool leftToRight=true;
             while (!q.empty())
             {
-
-                vector<int> level;
                 int size = q.size();
+                vector<int> level(size);
                 for (int i = 0; i < size; i++)
                 {
                     TreeNode *front = q.front();
                     q.pop();
+                    //find the position to insert
+                    int index=(leftToRight)?i:(size-1-i);
                     if (front->left != NULL) q.push(front->left);
                     if (front->right != NULL) q.push(front->right);
-                    level.push_back(front->val);
+                    level[index]=front->val;
                 }
-                if (cnt % 2 != 0)
-                    reverse(level.begin(), level.end());
+                leftToRight=!leftToRight;
                 ans.push_back(level);
-                cnt++;
             }
 
             return ans;
