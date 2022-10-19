@@ -11,33 +11,16 @@
  */
 class Solution {
 public:
-   vector<int> rightSideView(TreeNode *root)
-        {
-            vector<int> ans;
-            if (root == NULL)
-                return ans;
-            queue<pair<TreeNode *, int>> level;
-            map<int, int> top;
-            level.push({ root,
-                0 });
-            while (!level.empty())
-            {
-                auto it = level.front();
-                level.pop();
-                TreeNode *node = it.first;
-                int row = it.second;
-                top[row] = node->val;
-                if (node->left != NULL)
-                    level.push({ node->left,
-                        row + 1 });
-                if (node->right != NULL)
-                    level.push({ node->right,
-                        row + 1 });
-            }
-            for (auto it: top)
-            {
-                ans.push_back(it.second);
-            }
-            return ans;
-        }
+    void f(TreeNode*root,int level,vector<int>&ds){
+        if(root == NULL) return;
+        if(level == ds.size())ds.push_back(root->val);
+        f(root->right,level+1,ds);
+        f(root->left,level+1,ds);
+    }
+    
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int>ds;
+        f(root,0,ds);
+        return ds;
+    }
 };
