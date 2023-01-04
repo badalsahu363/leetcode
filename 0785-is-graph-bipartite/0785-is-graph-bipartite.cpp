@@ -1,6 +1,6 @@
 class Solution {
     private:
-    bool traversal(int start, int v , vector<vector<int>>& graph, int color[]){
+    bool bfs(int start, int v , vector<vector<int>>& graph, int color[]){
     queue<int> q;
     q.push(start) ; 
         color[start]=0;
@@ -30,7 +30,7 @@ public:
         for(int i=0 ; i < v ; i++ ) color[i]=-1 ;
         for(int i=0 ; i < v ; i++ ){
             if(color[i]==-1){
-                if(traversal(i, v,graph, color )==false){
+                if(bfs(i, v,graph, color )==false){
                     return false ; 
                 }
             }
