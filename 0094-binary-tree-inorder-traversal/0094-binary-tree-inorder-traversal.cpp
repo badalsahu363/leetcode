@@ -12,31 +12,22 @@
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int>inorder;
-        TreeNode* curr = root;
-        while(curr != NULL){
-            //case 1: if curr ->left is null then store and go to right
-            if(curr -> left == NULL){
-                inorder.push_back(curr->val);
-                curr = curr->right;
+        stack<TreeNode*>st;
+        vector<int>ans;
+        if(root == NULL) return ans;
+        TreeNode*node  = root;
+        while(true){
+            if(node != NULL){
+                st.push(node);
+                node = node->left;
             }else{
-                TreeNode* prev = curr->left;
-                //go to the right most part
-                while(prev->right && prev->right != curr){
-                    prev = prev->right;
-                }
-                //case 2: first check and then traverse: if prev->right is null then connect thread and then traverse left 
-                if(prev->right == NULL){
-                    prev->right = curr;
-                    curr =  curr->left;
-                }else{
-                    //case 3: if prev->right is not null then cut the thread and store and go to the right part
-                    prev->right = NULL;
-                    inorder.push_back(curr->val);
-                    curr = curr->right;
-                }
+                if(st.empty()) break;
+                node = st.top();
+                st.pop();
+                ans.push_back(node->val);
+                node = node->right;
             }
         }
-        return inorder;
-    }
+        return ans;
+    } 
 };
