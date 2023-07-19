@@ -13,7 +13,7 @@ public:
         int tail = 0, mxlen = -1, mysum = 0;
         for (int head = 0; head < nums.size(); ++head) {
             mysum += nums[head];
-            while (mysum > reqSum && tail <= head) {
+            while (mysum > reqSum) {
                 mysum -= nums[tail];
                 tail++;
             }
