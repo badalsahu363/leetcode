@@ -11,6 +11,6 @@ public:
             ans = max(ans,head-tail+1);
             
         }
-        return ans = max(ans,head-tail);
+        return ans;
     }
 };
